@@ -245,7 +245,7 @@ class TitleState extends MusicBeatState
 
 	function getIntroTextShit():Array<Array<String>>
 	{
-		var fullText:String = File.getContent("assets/preload/data/introText.txt");
+		var fullText:String = sys.io.File.getContent("assets/preload/data/introText.txt");
 
 		var firstArray:Array<String> = fullText.split('\n');
 		var swagGoodArray:Array<Array<String>> = [];

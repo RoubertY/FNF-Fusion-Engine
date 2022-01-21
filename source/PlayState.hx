@@ -85,7 +85,7 @@ class PlayState extends MusicBeatState
 	public static var bads:Int = 0;
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
-
+	public static var isPixelStage:Bool = false;
 	public static var songPosBG:FlxSprite;
 	public static var songPosBar:FlxBar;
 
@@ -704,6 +704,7 @@ class PlayState extends MusicBeatState
 			}
 			else if (SONG.stage == 'school')
 			{
+				isPixelStage = true;
 				curStage = 'school';
 				// defaultCamZoom = 0.9;
 	
@@ -770,6 +771,7 @@ class PlayState extends MusicBeatState
 			}
 			else if (SONG.stage == 'schoolEvil')
 			{
+				isPixelStage = true;
 				curStage = 'schoolEvil';
 	
 				var waveEffectBG = new FlxWaveEffect(FlxWaveMode.ALL, 2, -1, 3, 2);
@@ -4808,6 +4810,12 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+
+		notes.forEachAlive(function(daNote:Note){
+			if(daNote.endNote)	{
+				daNote.y += Conductor.stepCrochet / 50;
+			}
+		});
 
 		if (generatedMusic)
 		{

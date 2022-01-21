@@ -23,6 +23,7 @@ using StringTools;
 class Note extends FlxSprite
 {
 	public var strumTime:Float = 0;
+	public var endNote:Bool = false;
 
 	public var mustPress:Bool = false;
 	public var noteData:Int = 0;
@@ -225,12 +226,16 @@ class Note extends FlxSprite
 			switch (noteData)
 			{
 				case 2:
+					endNote = true;
 					animation.play('greenholdend');
 				case 3:
+					endNote = true;
 					animation.play('redholdend');
 				case 1:
+					endNote = true;
 					animation.play('blueholdend');
 				case 0:
+					endNote = true;
 					animation.play('purpleholdend');
 			}
 
@@ -254,9 +259,11 @@ class Note extends FlxSprite
 					case 3:
 						prevNote.animation.play('redhold');
 				}
-
 				
-				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.8 * FlxG.save.data.scrollSpeed;
+				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.55 * FlxG.save.data.scrollSpeed;
+				if(PlayState.isPixelStage) {
+					prevNote.scale.y *= 1.19;
+				}
 				prevNote.updateHitbox();
 				// prevNote.setGraphicSize();
 			}
